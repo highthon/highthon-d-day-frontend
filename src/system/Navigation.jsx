@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logo from '../assets/logo.png';
 
 const NavContainer = styled.nav`
@@ -12,18 +13,48 @@ const NavContainer = styled.nav`
 const NavMiddler = styled.div`
   width: 1180px;
   margin: 0 auto;
+  display: flex;
 `;
 
-export default function Navigation() {
-  return (
-    <NavContainer>
-      <NavMiddler>
-        <Link to="/"><img src={logo} alt="highthon logo" /></Link>
-        <Link to="/team">팀빌딩 신청</Link>
-        <Link to="/notice">공지사항</Link>
-        <Link to="/score">채점 기준</Link>
-        <Link to="/song">노래 신청</Link>
-      </NavMiddler>
-    </NavContainer>
-  );
+const StyledLink = styled(Link)`
+  line-height: 20px;
+  font-size: 20px;
+  display: block;
+  padding: 30px 0;
+  margin-right: 40px;
+  cursor: pointer;
+  color: ${props => (props.selected ? '#000' : '#555')};
+`;
+
+const links = [
+  { path: '/team', text: '팀빌딩 신청' },
+  { path: '/notice', text: '공지사항' },
+  { path: '/score', text: '채점 기준' },
+  { path: '/song', text: '노래 신청' },
+];
+
+export default class Navigation extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
+  }
+
+  render() {
+    const { currentPage } = this.props;
+    return (
+      <NavContainer>
+        <NavMiddler>
+          <StyledLink selected={currentPage} to="/" exact><img src={logo} alt="highthon logo" /></StyledLink>
+          {links.map(link => (
+            <StyledLink selected={currentPage === link.path} to={link.path}>
+              {link.text}
+            </StyledLink>
+          ))}
+        </NavMiddler>
+      </NavContainer>
+    );
+  }
 }
+
+Navigation.propTypes = {
+  currentPage: PropTypes.string.isRequired,
+};

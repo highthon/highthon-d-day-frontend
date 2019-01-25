@@ -9,6 +9,16 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+  }
+
+  div, a {
+    box-sizing: border-box;
+  }
 `;
 
 ReactDOM.render(

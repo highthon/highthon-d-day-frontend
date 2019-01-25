@@ -5,7 +5,7 @@ import Navigation from './system/Navigation';
 export default class App extends Component {
   render() {
     return (
-      <Navigation />
+      <Navigation currentPage="/team" />
     );
   }
 }
