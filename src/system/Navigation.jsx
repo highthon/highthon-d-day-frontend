@@ -43,9 +43,13 @@ export default class Navigation extends Component {
     return (
       <NavContainer>
         <NavMiddler>
-          <StyledLink selected={currentPage} to="/" exact><img src={logo} alt="highthon logo" /></StyledLink>
+          <StyledLink selected={currentPage} to="/" exact="true"><img src={logo} alt="highthon logo" /></StyledLink>
           {links.map(link => (
-            <StyledLink selected={currentPage === link.path} to={link.path}>
+            <StyledLink
+              selected={currentPage === link.path}
+              to={link.path}
+              key={`key-path:${link.path}`}
+            >
               {link.text}
             </StyledLink>
           ))}
