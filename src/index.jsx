@@ -16,7 +16,12 @@ const GlobalStyle = createGlobalStyle`
     cursor: inherit;
   }
 
-  div, a {
+  button {
+    border: none;
+    outline: none;
+  }
+
+  nav, div, a, button {
     box-sizing: border-box;
   }
 `;
