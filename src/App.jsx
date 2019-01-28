@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Navigation from './system/Navigation';
 import Button from './components/Button';
+import TeamApply from './pages/TeamApply';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {
@@ -8,7 +11,7 @@ export default class App extends Component {
     return (
       <div>
         <Navigation currentPage="/team" />
-        <Button onClick={() => console.log('button click')} text="button" />
+        <Route path="/team" component={TeamApply} />
       </div>
     );
   }
