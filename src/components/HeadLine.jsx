@@ -16,8 +16,9 @@ const StyledHeading = styled.h1`
 `;
 
 const Intro = styled.h2`
-  font-size: 20px;
+  font-size: 17px;
   color: #666;
+  font-weight: bold;
   display: inline;
 `;
 
