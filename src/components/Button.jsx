@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const StyledButton = styled.button`
+const Button = styled.button`
   width: 166px;
   height: 53px;
   border-radius: 5px;
@@ -11,20 +9,4 @@ const StyledButton = styled.button`
   color: #fff;
 `;
 
-export default class Button extends Component {
-  shouldComponentUpdate = () => false
-
-  render() {
-    const { text, onClick } = this.props;
-    return (
-      <StyledButton onClick={onClick}>
-        {text}
-      </StyledButton>
-    );
-  }
-}
-
-Button.propTypes = {
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+export default Button;
