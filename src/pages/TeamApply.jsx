@@ -117,11 +117,19 @@ export default class TeamApply extends Component {
     });
   }
 
+  deleteMemberInputCover = (id) => {
+    const { members } = this.state;
+    this.setState({
+      members: members.filter(member => member.id !== id),
+    });
+  }
+
   render() {
     const {
       handleSchoolName,
       handleMemberName,
       addMemberInputCover,
+      deleteMemberInputCover,
       state: { members },
     } = this;
 
@@ -137,7 +145,9 @@ export default class TeamApply extends Component {
           value={member.memberName}
           onChange={e => handleMemberName(index, e)}
         />
-        <DeleteButton>삭제</DeleteButton>
+        <DeleteButton onClick={() => deleteMemberInputCover(member.id)}>
+          삭제
+        </DeleteButton>
       </MemberInputContainer>
     ));
 
