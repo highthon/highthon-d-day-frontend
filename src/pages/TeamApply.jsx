@@ -67,7 +67,7 @@ const SubmitButton = styled(Button)`
   display: block;
 `;
 
-const membersId = 0;
+let membersId = 0;
 
 export default class TeamApply extends Component {
   state = {
@@ -105,8 +105,25 @@ export default class TeamApply extends Component {
     this.handleMember(index, 'memberName', value);
   }
 
+  addMemberInputCover = () => {
+    const { members } = this.state;
+    membersId += 1;
+    this.setState({
+      members: members.concat({
+        id: membersId,
+        schoolName: '',
+        memberName: '',
+      }),
+    });
+  }
+
   render() {
-    const { handleSchoolName, handleMemberName, state: { members } } = this;
+    const {
+      handleSchoolName,
+      handleMemberName,
+      addMemberInputCover,
+      state: { members },
+    } = this;
 
     const renderedMembers = members.map((member, index) => (
       <MemberInputContainer key={member.id}>
@@ -137,7 +154,9 @@ export default class TeamApply extends Component {
         <StyledLabel>
           팀 구성원의 소속 학교와 이름을 입력해주세요.
           <SubtextLabel>오타에 유의해주세요.</SubtextLabel>
-          <AddButton>추가</AddButton>
+          <AddButton onClick={addMemberInputCover}>
+            추가
+          </AddButton>
         </StyledLabel>
         {renderedMembers}
         <SubmitButton>
