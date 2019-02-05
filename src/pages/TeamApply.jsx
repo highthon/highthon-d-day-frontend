@@ -18,6 +18,7 @@ const StyledLabel = styled.label`
   line-height: 70px;
   margin-top: 30px;
   display: block;
+  position: relative;
 `;
 
 const SubtextLabel = styled.span`
@@ -43,17 +44,21 @@ const StyledInputText = styled.input`
 `;
 
 const StyledInputName = styled(StyledInputText)`
-  width: 380px;
+  width: 480px;
   margin-left: 20px;
 `;
 
 const AddButton = styled(Button)`
   width: 80px;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
-const DeleteButton = styled(AddButton)`
+const DeleteButton = styled(Button)`
   background-color: ${color1};
   color: ${color2};
+  width: 80px;
   margin-left: 20px;
 `;
 
@@ -132,6 +137,7 @@ export default class TeamApply extends Component {
         <StyledLabel>
           팀 구성원의 소속 학교와 이름을 입력해주세요.
           <SubtextLabel>오타에 유의해주세요.</SubtextLabel>
+          <AddButton>추가</AddButton>
         </StyledLabel>
         {renderedMembers}
         <SubmitButton>
