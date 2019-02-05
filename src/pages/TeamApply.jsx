@@ -62,9 +62,63 @@ const SubmitButton = styled(Button)`
   display: block;
 `;
 
-// eslint-disable-next-line react/prefer-stateless-function
+const membersId = 0;
+
 export default class TeamApply extends Component {
+  state = {
+    members: [
+      {
+        id: 0,
+        schoolName: '',
+        memberName: '',
+      },
+    ],
+  }
+
+  handleMember = (index, key, newValue) => {
+    const { state: { members } } = this;
+
+    const member = members[index];
+
+    const newMembers = [
+      ...members.slice(0, index),
+      {
+        ...member,
+        [key]: newValue,
+      },
+      ...members.slice(index + 1),
+    ];
+
+    this.setState({ members: newMembers });
+  }
+
+  handleSchoolName = (index, { target: { value } }) => {
+    this.handleMember(index, 'schoolName', value);
+  }
+
+  handleMemberName = (index, { target: { value } }) => {
+    this.handleMember(index, 'memberName', value);
+  }
+
   render() {
+    const { handleSchoolName, handleMemberName, state: { members } } = this;
+
+    const renderedMembers = members.map((member, index) => (
+      <MemberInputContainer key={member.id}>
+        <StyledInputText
+          placeholder="학교명"
+          value={member.schoolName}
+          onChange={e => handleSchoolName(index, e)}
+        />
+        <StyledInputName
+          placeholder="이름"
+          value={member.memberName}
+          onChange={e => handleMemberName(index, e)}
+        />
+        <DeleteButton>삭제</DeleteButton>
+      </MemberInputContainer>
+    ));
+
     return (
       <TeamApplyContainer>
         <HeadLine
@@ -79,11 +133,7 @@ export default class TeamApply extends Component {
           팀 구성원의 소속 학교와 이름을 입력해주세요.
           <SubtextLabel>오타에 유의해주세요.</SubtextLabel>
         </StyledLabel>
-        <MemberInputContainer>
-          <StyledInputText placeholder="학교명" />
-          <StyledInputName placeholder="이름" />
-          <DeleteButton>삭제</DeleteButton>
-        </MemberInputContainer>
+        {renderedMembers}
         <SubmitButton>
           제출하기
         </SubmitButton>
