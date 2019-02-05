@@ -16,12 +16,15 @@ const GlobalStyle = createGlobalStyle`
     cursor: inherit;
   }
 
-  button {
+  button, input {
     border: none;
     outline: none;
   }
 
-  nav, div, a, button {
+  nav, div, a, button,
+  h1, h2, h3, h4, h5, h6,
+  input, label,
+  header {
     box-sizing: border-box;
   }
 `;
