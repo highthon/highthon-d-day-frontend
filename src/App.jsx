@@ -10,7 +10,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Navigation currentPage="/team" />
+        <Navigation />
         <Route path="/team" component={TeamApply} />
       </div>
     );

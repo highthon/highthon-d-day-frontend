@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const NavContainer = styled.nav`
@@ -16,14 +15,18 @@ const NavMiddler = styled.div`
   display: flex;
 `;
 
-const StyledLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
   line-height: 20px;
   font-size: 20px;
   display: block;
   padding: 30px 0;
   margin-right: 40px;
   cursor: pointer;
-  color: ${props => (props.selected ? '#000' : '#555')};
+  color: #555;
+  &.active {
+    color: #000;
+    font-weight: bold;
+  }
 `;
 
 const links = [
@@ -33,32 +36,22 @@ const links = [
   { path: '/song', text: '노래 신청' },
 ];
 
-export default class Navigation extends Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
-  }
-
-  render() {
-    const { currentPage } = this.props;
-    return (
-      <NavContainer>
-        <NavMiddler>
-          <StyledLink selected={currentPage} to="/" exact="true"><img src={logo} alt="highthon logo" /></StyledLink>
-          {links.map(link => (
-            <StyledLink
-              selected={currentPage === link.path}
-              to={link.path}
-              key={`key-path:${link.path}`}
-            >
-              {link.text}
-            </StyledLink>
-          ))}
-        </NavMiddler>
-      </NavContainer>
-    );
-  }
+export default function Navigation() {
+  return (
+    <NavContainer>
+      <NavMiddler>
+        <StyledNavLink to="/">
+          <img src={logo} alt="highthon logo" />
+        </StyledNavLink>
+        {links.map(link => (
+          <StyledNavLink
+            to={link.path}
+            key={`key-path:${link.path}`}
+          >
+            {link.text}
+          </StyledNavLink>
+        ))}
+      </NavMiddler>
+    </NavContainer>
+  );
 }
-
-Navigation.propTypes = {
-  currentPage: PropTypes.string.isRequired,
-};
